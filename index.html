@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="cyan">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodel | Senior Full-Stack Engineer & Creative Technologist</title>
+  <meta name="description" content="Portfolio of Rodel - Professional Full-Stack Software Engineer, Systems Architect & Creative Technologist crafting high-performance digital products.">
+  <meta name="keywords" content="Rodel, Portfolio, Full-Stack Developer, Software Engineer, Web Developer, Dark Theme, Creative Developer">
+  <meta name="author" content="Rodel">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rodel | Senior Full-Stack Engineer">
+  <meta property="og:description" content="Crafting high-performance web applications, resilient architectures, and futuristic digital experiences.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Interactive Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Cursor Spotlight -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" id="navbar">
+      <!-- Logo / Brand -->
+      <a href="#hero" class="brand-logo" aria-label="Rodel Homepage">
+        <div class="logo-symbol">
+          <span>R</span>
+          <div class="logo-indicator"></div>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">RODEL</span>
+          <span class="logo-badge">DEV.OS</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <div class="nav-menu-desktop">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active" data-nav="hero"><i data-lucide="home"></i> Home</a></li>
+          <li><a href="#about" class="nav-link" data-nav="about"><i data-lucide="user"></i> About</a></li>
+          <li><a href="#skills" class="nav-link" data-nav="skills"><i data-lucide="cpu"></i> Skills</a></li>
+          <li><a href="#projects" class="nav-link" data-nav="projects"><i data-lucide="folder-git-2"></i> Projects</a></li>
+          <li><a href="#experience" class="nav-link" data-nav="experience"><i data-lucide="briefcase"></i> Experience</a></li>
+          <li><a href="#terminal" class="nav-link" data-nav="terminal"><i data-lucide="terminal"></i> Console</a></li>
+          <li><a href="#contact" class="nav-link" data-nav="contact"><i data-lucide="mail"></i> Contact</a></li>
+        </ul>
+        <div class="nav-active-pill" id="navActivePill"></div>
+      </div>
+
+      <!-- Header Utilities -->
+      <div class="nav-actions">
+        <!-- Quick Command Palette Button (Ctrl+K) -->
+        <button class="cmd-trigger-btn" id="cmdTriggerBtn" title="Quick Search (Ctrl + K)">
+          <i data-lucide="search"></i>
+          <span class="cmd-text">Search</span>
+          <kbd>Ctrl+K</kbd>
+        </button>
+
+        <!-- Audio Effect Toggle -->
+        <button class="icon-btn" id="soundToggle" title="Toggle UI Sound Effects" aria-label="Sound Toggle">
+          <i data-lucide="volume-2" id="soundIcon"></i>
+        </button>
+
+        <!-- Accent Color Picker Dropdown Trigger -->
+        <div class="theme-accent-picker">
+          <button class="icon-btn" id="accentMenuBtn" title="Switch Accent Color" aria-label="Accent Palette">
+            <i data-lucide="palette"></i>
+          </button>
+          <div class="accent-dropdown" id="accentDropdown">
+            <span class="dropdown-title">Accent Theme</span>
+            <div class="accent-options">
+              <button class="accent-dot active" data-accent-color="cyan" title="Neon Cyan" style="--c: #00f2fe;"></button>
+              <button class="accent-dot" data-accent-color="purple" title="Electric Violet" style="--c: #a855f7;"></button>
+              <button class="accent-dot" data-accent-color="emerald" title="Matrix Emerald" style="--c: #10b981;"></button>
+              <button class="accent-dot" data-accent-color="amber" title="Solar Amber" style="--c: #f59e0b;"></button>
+              <button class="accent-dot" data-accent-color="rose" title="Cyber Rose" style="--c: #f43f5e;"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Mobile Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <div class="logo-symbol">
+        <span>R</span>
+      </div>
+      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Mobile Menu">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#hero" class="mobile-link"><i data-lucide="home"></i> Home</a></li>
+      <li><a href="#about" class="mobile-link"><i data-lucide="user"></i> About Me</a></li>
+      <li><a href="#skills" class="mobile-link"><i data-lucide="cpu"></i> Tech Stack</a></li>
+      <li><a href="#projects" class="mobile-link"><i data-lucide="folder-git-2"></i> Featured Works</a></li>
+      <li><a href="#experience" class="mobile-link"><i data-lucide="briefcase"></i> Experience</a></li>
+      <li><a href="#terminal" class="mobile-link"><i data-lucide="terminal"></i> Interactive Shell</a></li>
+      <li><a href="#contact" class="mobile-link"><i data-lucide="mail"></i> Get In Touch</a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <div class="mobile-status">
+        <span class="pulse-indicator"></span> Available for Hire
+      </div>
+      <a href="#contact" class="btn btn-primary btn-block mobile-contact-btn">Let's Talk</a>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="section hero-section" id="hero">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <!-- Live Availability Pill -->
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          <span class="badge-text">Available for Full-time Roles & High-Impact Contracts</span>
+          <span class="badge-chip">2026 Ready</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="hero-title">
+          Hi, I'm <span class="gradient-text glow-text">Rodel</span>.<br>
+          <span class="typing-container">
+            <span class="static-prefix">I architect </span>
+            <span class="typing-text" id="typewriterText">scalable systems.</span>
+            <span class="typing-cursor">|</span>
+          </span>
+        </h1>
+
+        <!-- Subtitle / Mission -->
+        <p class="hero-description">
+          Senior Full-Stack Engineer & Creative Technologist specialized in designing resilient microservices, high-speed distributed web architectures, and visually stunning digital products that delight users worldwide.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="hero-cta-group">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Projects</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i data-lucide="message-square"></i>
+            <span>Get in Touch</span>
+          </a>
+          <button class="btn btn-ghost" id="copyEmailBtn" data-email="rodel.engineer@gmail.com">
+            <i data-lucide="copy"></i>
+            <span>Copy Email</span>
+          </button>
+        </div>
+
+        <!-- Key Metrics Strip -->
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <div class="metric-number" data-count="6">0</div>
+            <div class="metric-plus">+</div>
+            <div class="metric-label">Years of Engineering</div>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <div class="metric-number" data-count="45">0</div>
+            <div class="metric-plus">+</div>
+            <div class="metric-label">Production Projects</div>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <div class="metric-number" data-count="99">0</div>
+            <div class="metric-plus">.9%</div>
+            <div class="metric-label">Uptime Architecture</div>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-card">
+            <div class="metric-number" data-count="100">0</div>
+            <div class="metric-plus">%</div>
+            <div class="metric-label">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Interactive Card -->
+      <div class="hero-visual">
+        <div class="terminal-preview-card">
+          <div class="card-glass-glow"></div>
+          <div class="card-header">
+            <div class="window-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="card-tab"><i data-lucide="code-2"></i> rodel.config.ts</div>
+            <div class="card-meta">v3.8.4</div>
+          </div>
+          <div class="card-body">
+            <pre class="code-block"><code><span class="tok-kw">interface</span> <span class="tok-type">DeveloperProfile</span> {
+  <span class="tok-prop">name</span>: <span class="tok-str">'Rodel'</span>;
+  <span class="tok-prop">role</span>: <span class="tok-str">'Lead Full-Stack Architect'</span>;
+  <span class="tok-prop">stack</span>: [<span class="tok-str">'TypeScript'</span>, <span class="tok-str">'Go'</span>, <span class="tok-str">'React'</span>, <span class="tok-str">'Node.js'</span>, <span class="tok-str">'Docker'</span>];
+  <span class="tok-prop">philosophy</span>: <span class="tok-str">'Clean code, sub-second latency, zero downtime'</span>;
+  <span class="tok-prop">status</span>: <span class="tok-str">'OPEN_TO_OPPORTUNITIES'</span>;
+}
+
+<span class="tok-kw">export const</span> <span class="tok-fn">buildExperience</span> = <span class="tok-kw">async</span> () => {
+  <span class="tok-kw">return new</span> <span class="tok-type">Future</span>({
+    performance: <span class="tok-str">'100/100 Lighthouse'</span>,
+    security: <span class="tok-str">'Zero-Trust Standard'</span>,
+    aesthetics: <span class="tok-str">'Awwwards-Caliber Dark Elegance'</span>
+  });
+};</code></pre>
+          </div>
+          <div class="card-footer">
+            <div class="status-indicator-live">
+              <span class="live-dot"></span>
+              <span>All systems operational</span>
+            </div>
+            <div class="tech-tags-mini">
+              <span>TS</span>
+              <span>Go</span>
+              <span>React</span>
+              <span>AWS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Down Hint -->
+    <a href="#about" class="scroll-indicator" aria-label="Scroll Down">
+      <span class="scroll-text">EXPLORE</span>
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ================= ABOUT SECTION ================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="user"></i>
+        <span>DISCOVER</span>
+      </div>
+      <h2 class="section-title">Engineered with Purpose, <span class="gradient-text">Designed to Excel</span></h2>
+      <p class="section-subtitle">Bridging the gap between robust backend systems and intuitive, boundary-pushing client experiences.</p>
+
+      <div class="about-grid">
+        <!-- Bio Card -->
+        <div class="about-card glass-panel bio-card">
+          <div class="card-glow-bg"></div>
+          <div class="bio-avatar-wrapper">
+            <div class="bio-avatar">
+              <span class="avatar-letter">R</span>
+              <div class="avatar-ring"></div>
+            </div>
+            <div class="bio-meta">
+              <h3>Rodel</h3>
+              <p>Full-Stack Engineer & Tech Innovator</p>
+              <div class="location-tag">
+                <i data-lucide="map-pin"></i> Ready for Worldwide Remote & On-Site
+              </div>
+            </div>
+          </div>
+          
+          <div class="bio-text">
+            <p>
+              Over the last 6+ years, I have specialized in building mission-critical enterprise applications, modern web services, and bespoke interactive tools. My work thrives at the intersection of <strong>high-throughput engineering</strong> and <strong>flawless user experience</strong>.
+            </p>
+            <p>
+              Whether it is orchestrating microservices on Kubernetes, scaling GraphQL APIs to thousands of concurrent users, or crafting ultra-slick front-ends with micro-interactions, I treat performance and security as core architectural tenants rather than afterthoughts.
+            </p>
+          </div>
+
+          <div class="bio-tags">
+            <span class="chip"><i data-lucide="check-circle-2"></i> Full Lifecycle Dev</span>
+            <span class="chip"><i data-lucide="check-circle-2"></i> Cloud Architecture</span>
+            <span class="chip"><i data-lucide="check-circle-2"></i> UI/UX Precision</span>
+            <span class="chip"><i data-lucide="check-circle-2"></i> API Design</span>
+          </div>
+
+          <div class="bio-actions">
+            <a href="#contact" class="btn btn-primary btn-sm">
+              <i data-lucide="send"></i> Let's Collaborate
+            </a>
+            <button class="btn btn-secondary btn-sm" id="downloadResumeBtn">
+              <i data-lucide="download"></i> Download Resume
+            </button>
+          </div>
+        </div>
+
+        <!-- Highlights & Interactive Pillars -->
+        <div class="about-pillars">
+          <!-- Pillar 1 -->
+          <div class="pillar-card glass-panel">
+            <div class="pillar-icon">
+              <i data-lucide="zap"></i>
+            </div>
+            <div class="pillar-content">
+              <h4>Lightning Fast & Optimized</h4>
+              <p>Specialized in Core Web Vitals, server-side caching, edge compute, and database query optimization for sub-millisecond latencies.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar-card glass-panel">
+            <div class="pillar-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="pillar-content">
+              <h4>Secure & Battle-Tested</h4>
+              <p>Implementing Zero-Trust patterns, robust authentication (OAuth/JWT/WebAuthn), automated CI/CD security audits, and OWASP compliance.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar-card glass-panel">
+            <div class="pillar-icon">
+              <i data-lucide="layers"></i>
+            </div>
+            <div class="pillar-content">
+              <h4>Scalable Micro-Architecture</h4>
+              <p>Designing decoupled distributed services, event-driven pipelines (Kafka, Redis), and clean modular domain-driven codebases.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="pillar-card glass-panel">
+            <div class="pillar-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <div class="pillar-content">
+              <h4>Aesthetic Perfection</h4>
+              <p>Crafting silky 60fps animations, accessible WCAG-compliant design systems, and modern dark-mode interfaces users love.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS / TECH STACK SECTION ================= -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="cpu"></i>
+        <span>ARSENAL</span>
+      </div>
+      <h2 class="section-title">Tech Stack & <span class="gradient-text">Core Competencies</span></h2>
+      <p class="section-subtitle">A curated suite of modern technologies, libraries, and frameworks I leverage to engineer robust digital systems.</p>
+
+      <!-- Skills Tab Category Selector -->
+      <div class="skills-category-tabs">
+        <button class="skill-tab active" data-category="all"><i data-lucide="layout-grid"></i> All Technologies</button>
+        <button class="skill-tab" data-category="frontend"><i data-lucide="monitor"></i> Frontend</button>
+        <button class="skill-tab" data-category="backend"><i data-lucide="server"></i> Backend & APIs</button>
+        <button class="skill-tab" data-category="database"><i data-lucide="database"></i> Databases</button>
+        <button class="skill-tab" data-category="devops"><i data-lucide="cloud"></i> DevOps & Cloud</button>
+        <button class="skill-tab" data-category="tools"><i data-lucide="wrench"></i> Architecture & Tools</button>
+      </div>
+
+      <!-- Skills Grid Container -->
+      <div class="skills-grid" id="skillsGrid">
+        <!-- Frontend -->
+        <div class="skill-card glass-panel" data-cat="frontend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #61dafb;">
+              <i data-lucide="code-2"></i>
+            </div>
+            <div class="skill-info">
+              <h4>React & Next.js</h4>
+              <span class="skill-level">Advanced / Production</span>
+            </div>
+            <span class="skill-percent">95%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 95%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Server Components</span>
+            <span>SSR / SSG</span>
+            <span>Hooks</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="frontend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #3178c6;">
+              <i data-lucide="file-code"></i>
+            </div>
+            <div class="skill-info">
+              <h4>TypeScript</h4>
+              <span class="skill-level">Strict Typing Master</span>
+            </div>
+            <span class="skill-percent">94%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 94%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Generics</span>
+            <span>Utility Types</span>
+            <span>AST</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="frontend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #38bdf8;">
+              <i data-lucide="palette"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Tailwind CSS & Modern CSS</h4>
+              <span class="skill-level">Design Systems</span>
+            </div>
+            <span class="skill-percent">98%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 98%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>CSS Variables</span>
+            <span>Flex/Grid</span>
+            <span>Keyframes</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="frontend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #41b883;">
+              <i data-lucide="layout"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Vue.js & Nuxt</h4>
+              <span class="skill-level">Reactive Systems</span>
+            </div>
+            <span class="skill-percent">88%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 88%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Composition API</span>
+            <span>Pinia</span>
+            <span>Nuxt 3</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="skill-card glass-panel" data-cat="backend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #68a063;">
+              <i data-lucide="server"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Node.js & Express / Fastify</h4>
+              <span class="skill-level">High Concurrency</span>
+            </div>
+            <span class="skill-percent">92%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 92%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Async Architecture</span>
+            <span>Streams</span>
+            <span>REST/RPC</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="backend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #00add8;">
+              <i data-lucide="terminal-square"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Golang</h4>
+              <span class="skill-level">Distributed Services</span>
+            </div>
+            <span class="skill-percent">86%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 86%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Goroutines</span>
+            <span>Channels</span>
+            <span>gRPC</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="backend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #e535ab;">
+              <i data-lucide="network"></i>
+            </div>
+            <div class="skill-info">
+              <h4>GraphQL & RESTful APIs</h4>
+              <span class="skill-level">API Federation</span>
+            </div>
+            <span class="skill-percent">91%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 91%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Schema Stitching</span>
+            <span>DataLoader</span>
+            <span>Apollo</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="backend">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #3776ab;">
+              <i data-lucide="code"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Python & FastAPI</h4>
+              <span class="skill-level">Microservices & AI Integration</span>
+            </div>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 85%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>AsyncIO</span>
+            <span>Pydantic</span>
+            <span>AI Pipelines</span>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="skill-card glass-panel" data-cat="database">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #336791;">
+              <i data-lucide="database"></i>
+            </div>
+            <div class="skill-info">
+              <h4>PostgreSQL & MySQL</h4>
+              <span class="skill-level">Relational Modeling</span>
+            </div>
+            <span class="skill-percent">93%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 93%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Indexing</span>
+            <span>Transactions</span>
+            <span>Prisma / TypeORM</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="database">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #d82c20;">
+              <i data-lucide="zap"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Redis</h4>
+              <span class="skill-level">In-Memory Cache & Pub/Sub</span>
+            </div>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 90%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Rate Limiting</span>
+            <span>Session Store</span>
+            <span>Queues</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="database">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #47a248;">
+              <i data-lucide="hard-drive"></i>
+            </div>
+            <div class="skill-info">
+              <h4>MongoDB</h4>
+              <span class="skill-level">Document Store</span>
+            </div>
+            <span class="skill-percent">88%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 88%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Aggregation Pipelines</span>
+            <span>Mongoose</span>
+            <span>Atlas</span>
+          </div>
+        </div>
+
+        <!-- DevOps & Cloud -->
+        <div class="skill-card glass-panel" data-cat="devops">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #2496ed;">
+              <i data-lucide="box"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Docker & Containerization</h4>
+              <span class="skill-level">Multi-Stage Builds</span>
+            </div>
+            <span class="skill-percent">92%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 92%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Compose</span>
+            <span>Image Optimization</span>
+            <span>Security</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="devops">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #ff9900;">
+              <i data-lucide="cloud"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Amazon Web Services (AWS)</h4>
+              <span class="skill-level">Cloud Architecture</span>
+            </div>
+            <span class="skill-percent">87%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 87%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>S3 / CloudFront</span>
+            <span>Lambda</span>
+            <span>ECS / RDS</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="devops">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #326ce5;">
+              <i data-lucide="anchor"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Kubernetes & CI/CD</h4>
+              <span class="skill-level">GitOps & Automation</span>
+            </div>
+            <span class="skill-percent">82%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 82%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>GitHub Actions</span>
+            <span>Helm</span>
+            <span>Ingress</span>
+          </div>
+        </div>
+
+        <!-- Tools & Architecture -->
+        <div class="skill-card glass-panel" data-cat="tools">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #f05032;">
+              <i data-lucide="git-branch"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Git & Version Control</h4>
+              <span class="skill-level">Collaborative Workflows</span>
+            </div>
+            <span class="skill-percent">96%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 96%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Gitflow</span>
+            <span>Interactive Rebase</span>
+            <span>Hooks</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass-panel" data-cat="tools">
+          <div class="skill-header">
+            <div class="skill-icon-wrap" style="--accent-icon: #10b981;">
+              <i data-lucide="check-square"></i>
+            </div>
+            <div class="skill-info">
+              <h4>Testing & TDD</h4>
+              <span class="skill-level">Unit / E2E / Integration</span>
+            </div>
+            <span class="skill-percent">89%</span>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-fill" style="width: 89%;"></div>
+          </div>
+          <div class="skill-tags">
+            <span>Jest / Vitest</span>
+            <span>Playwright</span>
+            <span>Cypress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED PROJECTS SECTION ================= -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="folder-git-2"></i>
+        <span>PORTFOLIO SHOWCASE</span>
+      </div>
+      <h2 class="section-title">Selected Works & <span class="gradient-text">Flagship Projects</span></h2>
+      <p class="section-subtitle">Real-world systems, applications, and tools engineered to solve complex problems at scale.</p>
+
+      <!-- Projects Filter Menu -->
+      <div class="projects-filter-bar">
+        <button class="filter-btn active" data-filter="all">All Works <span class="filter-count">6</span></button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack <span class="filter-count">3</span></button>
+        <button class="filter-btn" data-filter="ai-cloud">AI & Cloud <span class="filter-count">2</span></button>
+        <button class="filter-btn" data-filter="frontend">Creative Web <span class="filter-count">2</span></button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- Project 1: Enterprise Cloud Orchestrator -->
+        <article class="project-card glass-panel" data-category="fullstack ai-cloud" data-project-id="1">
+          <div class="project-image-wrap">
+            <div class="project-mockup mockup-1">
+              <div class="mockup-screen">
+                <div class="mockup-bar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="mockup-url">https://cloudmesh.io/dashboard</span>
+                </div>
+                <div class="mockup-content">
+                  <div class="mockup-stat-row">
+                    <div class="mockup-stat-box"><span>Node Cluster</span><strong>48 Nodes</strong></div>
+                    <div class="mockup-stat-box"><span>Throughput</span><strong>128k req/s</strong></div>
+                    <div class="mockup-stat-box"><span>Latency</span><strong>4.2ms</strong></div>
+                  </div>
+                  <div class="mockup-wave-chart"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-badge-pill">Featured Project</div>
+          </div>
+          <div class="project-details">
+            <div class="project-meta-row">
+              <span class="project-cat">Distributed Cloud Platform</span>
+              <span class="project-year">2026</span>
+            </div>
+            <h3 class="project-title">CloudMesh OS | Multi-Cloud Observability Engine</h3>
+            <p class="project-desc">
+              A high-throughput distributed telemetry and container orchestration platform capable of monitoring 10,000+ microservices in real-time with sub-millisecond alerting.
+            </p>
+            <div class="project-tags">
+              <span>Go</span>
+              <span>TypeScript</span>
+              <span>Next.js 15</span>
+              <span>Kafka</span>
+              <span>Kubernetes</span>
+              <span>ClickHouse</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-primary btn-sm view-details-btn" data-project-id="1">
+                <i data-lucide="eye"></i> Case Study
+              </button>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+                <i data-lucide="github"></i> Source
+              </a>
+              <a href="#" class="btn btn-ghost btn-sm demo-preview-btn" data-project-name="CloudMesh OS" aria-label="Live Demo">
+                <i data-lucide="external-link"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: AI Automated Knowledge Copilot -->
+        <article class="project-card glass-panel" data-category="ai-cloud fullstack" data-project-id="2">
+          <div class="project-image-wrap">
+            <div class="project-mockup mockup-2">
+              <div class="mockup-screen">
+                <div class="mockup-bar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="mockup-url">https://synthex-ai.dev</span>
+                </div>
+                <div class="mockup-content">
+                  <div class="mockup-chat-bubble query">Analyze repository security vulnerabilities & suggest patches</div>
+                  <div class="mockup-chat-bubble response">Scan complete: 0 critical, 3 minor warnings patched automatically.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-meta-row">
+              <span class="project-cat">AI & Developer Tools</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3 class="project-title">Synthex AI | Enterprise Codebase Copilot</h3>
+            <p class="project-desc">
+              Intelligent vector-search indexing agent that ingests enterprise source code repositories, detects performance anti-patterns, and automates PR pull-request reviews.
+            </p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>FastAPI</span>
+              <span>React</span>
+              <span>Qdrant Vector DB</span>
+              <span>Docker</span>
+              <span>OpenAI API</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-primary btn-sm view-details-btn" data-project-id="2">
+                <i data-lucide="eye"></i> Case Study
+              </button>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+                <i data-lucide="github"></i> Source
+              </a>
+              <a href="#" class="btn btn-ghost btn-sm demo-preview-btn" data-project-name="Synthex AI" aria-label="Live Demo">
+                <i data-lucide="external-link"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Nexus Pay High-Volume Financial Gateway -->
+        <article class="project-card glass-panel" data-category="fullstack" data-project-id="3">
+          <div class="project-image-wrap">
+            <div class="project-mockup mockup-3">
+              <div class="mockup-screen">
+                <div class="mockup-bar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="mockup-url">https://nexuspay.fintech.io</span>
+                </div>
+                <div class="mockup-content">
+                  <div class="mockup-fin-card">
+                    <span class="fin-brand">NEXUS PRIME</span>
+                    <span class="fin-balance">$2,849,120.50</span>
+                    <span class="fin-status">PCI-DSS Level 1 Compliant</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-meta-row">
+              <span class="project-cat">Fintech Architecture</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3 class="project-title">Nexus Pay | Global Payment Ledger & Checkout</h3>
+            <p class="project-desc">
+              Fault-tolerant payment gateway featuring double-entry ledgering, multi-currency conversion, automated fraud scoring, and instant webhooks with idempotency.
+            </p>
+            <div class="project-tags">
+              <span>Node.js</span>
+              <span>TypeScript</span>
+              <span>PostgreSQL</span>
+              <span>Redis</span>
+              <span>Stripe API</span>
+              <span>AWS KMS</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-primary btn-sm view-details-btn" data-project-id="3">
+                <i data-lucide="eye"></i> Case Study
+              </button>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+                <i data-lucide="github"></i> Source
+              </a>
+              <a href="#" class="btn btn-ghost btn-sm demo-preview-btn" data-project-name="Nexus Pay" aria-label="Live Demo">
+                <i data-lucide="external-link"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: VoxelSpace 3D WebGL Metaverse Studio -->
+        <article class="project-card glass-panel" data-category="frontend" data-project-id="4">
+          <div class="project-image-wrap">
+            <div class="project-mockup mockup-4">
+              <div class="mockup-screen">
+                <div class="mockup-bar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="mockup-url">https://voxelspace.design</span>
+                </div>
+                <div class="mockup-content">
+                  <div class="mockup-3d-wireframe">
+                    <div class="wire-cube"></div>
+                    <div class="wire-rings"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-meta-row">
+              <span class="project-cat">3D Graphics & WebGL</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3 class="project-title">VoxelSpace | Interactive Spatial 3D Editor</h3>
+            <p class="project-desc">
+              In-browser 3D scene builder and shader experimentation suite with real-time PBR lighting, GLTF model optimization, and collision physics at 60 FPS.
+            </p>
+            <div class="project-tags">
+              <span>Three.js</span>
+              <span>GLSL Shaders</span>
+              <span>WebAudio API</span>
+              <span>Tailwind CSS</span>
+              <span>Vite</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-primary btn-sm view-details-btn" data-project-id="4">
+                <i data-lucide="eye"></i> Case Study
+              </button>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+                <i data-lucide="github"></i> Source
+              </a>
+              <a href="#" class="btn btn-ghost btn-sm demo-preview-btn" data-project-name="VoxelSpace" aria-label="Live Demo">
+                <i data-lucide="external-link"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: DevPulse Realtime Collaboration Canvas -->
+        <article class="project-card glass-panel" data-category="frontend fullstack" data-project-id="5">
+          <div class="project-image-wrap">
+            <div class="project-mockup mockup-5">
+              <div class="mockup-screen">
+                <div class="mockup-bar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="mockup-url">https://devpulse.collab.app</span>
+                </div>
+                <div class="mockup-content">
+                  <div class="collab-cursor-simulation">
+                    <div class="sim-cursor c1"><span>Alex</span></div>
+                    <div class="sim-cursor c2"><span>Elena</span></div>
+                    <div class="sim-node">Architecture Diagram v2</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-meta-row">
+              <span class="project-cat">Realtime Collaborative App</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3 class="project-title">DevPulse | Multiplayer Infinite Canvas</h3>
+            <p class="project-desc">
+              Real-time collaborative diagramming whiteboard powered by CRDTs (Conflict-free Replicated Data Types) and WebSockets with zero sync lag.
+            </p>
+            <div class="project-tags">
+              <span>React</span>
+              <span>WebSockets</span>
+              <span>Yjs / CRDT</span>
+              <span>Canvas API</span>
+              <span>Tailwind</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-primary btn-sm view-details-btn" data-project-id="5">
+                <i data-lucide="eye"></i> Case Study
+              </button>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+                <i data-lucide="github"></i> Source
+              </a>
+              <a href="#" class="btn btn-ghost btn-sm demo-preview-btn" data-project-name="DevPulse" aria-label="Live Demo">
+                <i data-lucide="external-link"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Aether CLI & Developer Terminal Suite -->
+        <article class="project-card glass-panel" data-category="ai-cloud" data-project-id="6">
+          <div class="project-image-wrap">
+            <div class="project-mockup mockup-6">
+              <div class="mockup-screen">
+                <div class="mockup-bar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <span class="mockup-url">terminal://aether-cli</span>
+                </div>
+                <div class="mockup-content">
+                  <div class="mockup-term-line"><span class="t-green">✔</span> Infrastructure verified</div>
+                  <div class="mockup-term-line"><span class="t-cyan">➜</span> Deploying to 12 edge locations...</div>
+                  <div class="mockup-term-line"><span class="t-green">✔</span> Deployed in 840ms</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-meta-row">
+              <span class="project-cat">CLI & Developer Experience</span>
+              <span class="project-year">2023</span>
+            </div>
+            <h3 class="project-title">Aether CLI | Edge Infrastructure Automator</h3>
+            <p class="project-desc">
+              Ultra-fast cross-platform CLI tool for scaffolding cloud environments, provisioning terraform scripts, and generating instant preview deployments.
+            </p>
+            <div class="project-tags">
+              <span>Go</span>
+              <span>Rust</span>
+              <span>Terraform</span>
+              <span>Docker</span>
+              <span>GitHub Actions</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-primary btn-sm view-details-btn" data-project-id="6">
+                <i data-lucide="eye"></i> Case Study
+              </button>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+                <i data-lucide="github"></i> Source
+              </a>
+              <a href="#" class="btn btn-ghost btn-sm demo-preview-btn" data-project-name="Aether CLI" aria-label="Live Demo">
+                <i data-lucide="external-link"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE & TIMELINE ================= -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="briefcase"></i>
+        <span>CAREER TRACK</span>
+      </div>
+      <h2 class="section-title">Professional Journey & <span class="gradient-text">Leadership</span></h2>
+      <p class="section-subtitle">Consistent track record of engineering leadership, scalable product delivery, and technical innovation.</p>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <!-- Role 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot">
+            <div class="dot-inner"></div>
+          </div>
+          <div class="timeline-card glass-panel">
+            <div class="timeline-header">
+              <div class="timeline-role-info">
+                <h3>Lead Software Architect</h3>
+                <span class="timeline-company">Aura Systems Inc.</span>
+              </div>
+              <span class="timeline-period">2023 — Present</span>
+            </div>
+            <p class="timeline-description">
+              Spearheading the technical roadmap for the core SaaS enterprise infrastructure. Overseeing 14 senior engineers across distributed frontend, backend, and DevOps workstreams.
+            </p>
+            <ul class="timeline-bullets">
+              <li>Refactored monolithic legacy systems into Golang and Node.js microservices, slashing cloud spend by 38%.</li>
+              <li>Engineered an event-driven pub/sub architecture supporting 500,000+ daily active websocket sessions with zero downtime.</li>
+              <li>Mentored 10+ software engineers, instituted rigid automated testing, and elevated test coverage from 44% to 92%.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>Golang</span>
+              <span>Kubernetes</span>
+              <span>AWS</span>
+              <span>Next.js</span>
+              <span>Kafka</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot">
+            <div class="dot-inner"></div>
+          </div>
+          <div class="timeline-card glass-panel">
+            <div class="timeline-header">
+              <div class="timeline-role-info">
+                <h3>Senior Full-Stack Engineer</h3>
+                <span class="timeline-company">Quantix Digital Labs</span>
+              </div>
+              <span class="timeline-period">2021 — 2023</span>
+            </div>
+            <p class="timeline-description">
+              Engineered high-performance web applications and internal tools for high-growth fintech and enterprise clients.
+            </p>
+            <ul class="timeline-bullets">
+              <li>Architected a real-time analytics portal that reduced customer query processing times from 12s to under 350ms.</li>
+              <li>Designed and published an internal React component system adopted by 6 product teams, speeding development cycles by 50%.</li>
+              <li>Built automated CI/CD deployment pipelines on AWS with zero-downtime blue/green rollouts.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>React</span>
+              <span>TypeScript</span>
+              <span>PostgreSQL</span>
+              <span>GraphQL</span>
+              <span>Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot">
+            <div class="dot-inner"></div>
+          </div>
+          <div class="timeline-card glass-panel">
+            <div class="timeline-header">
+              <div class="timeline-role-info">
+                <h3>Software Engineer</h3>
+                <span class="timeline-company">Vortex Innovations</span>
+              </div>
+              <span class="timeline-period">2019 — 2021</span>
+            </div>
+            <p class="timeline-description">
+              Developed scalable RESTful APIs, responsive web applications, and database schemas for e-commerce and media streaming services.
+            </p>
+            <ul class="timeline-bullets">
+              <li>Developed custom caching layers with Redis, handling 10x traffic spikes during product launches without degradation.</li>
+              <li>Integrated third-party payment gateways, webhooks, and fraud detection mechanisms.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span>JavaScript</span>
+              <span>Node.js</span>
+              <span>Express</span>
+              <span>MongoDB</span>
+              <span>Redis</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE TERMINAL / CONSOLE ================= -->
+  <section class="section" id="terminal">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="terminal"></i>
+        <span>INTERACTIVE SHELL</span>
+      </div>
+      <h2 class="section-title">Developer Console & <span class="gradient-text">CLI Sandbox</span></h2>
+      <p class="section-subtitle">A live terminal interface embedded in the browser. Type commands to discover hidden easter eggs, resume stats, and system specs.</p>
+
+      <div class="terminal-wrapper glass-panel">
+        <div class="terminal-bar">
+          <div class="terminal-buttons">
+            <span class="t-btn t-close"></span>
+            <span class="t-btn t-min"></span>
+            <span class="t-btn t-max"></span>
+          </div>
+          <div class="terminal-title">rodel@portfolio-os: ~ (zsh)</div>
+          <div class="terminal-actions">
+            <button class="t-action-btn" id="termHelpBtn" title="Show Help"><i data-lucide="help-circle"></i></button>
+            <button class="t-action-btn" id="termClearBtn" title="Clear Screen"><i data-lucide="trash-2"></i></button>
+          </div>
+        </div>
+
+        <div class="terminal-body" id="terminalOutput">
+          <div class="term-line output-system">
+            <span class="t-green">●</span> Welcome to <strong>Rodel OS v3.8.4-LTS</strong> (x86_64-apple-darwin).
+          </div>
+          <div class="term-line output-system">
+            Type <span class="t-cyan font-bold">help</span> to list available commands, or click any quick command below:
+          </div>
+          <div class="term-quick-chips">
+            <button class="quick-cmd-chip" data-cmd="help">help</button>
+            <button class="quick-cmd-chip" data-cmd="skills">skills</button>
+            <button class="quick-cmd-chip" data-cmd="projects">projects</button>
+            <button class="quick-cmd-chip" data-cmd="contact">contact</button>
+            <button class="quick-cmd-chip" data-cmd="sudo hire">sudo hire</button>
+            <button class="quick-cmd-chip" data-cmd="theme purple">theme purple</button>
+          </div>
+        </div>
+
+        <!-- Terminal Input Row -->
+        <div class="terminal-input-row">
+          <span class="term-prompt">rodel@os:~$</span>
+          <input type="text" id="terminalInput" class="term-input" placeholder="Type a command (e.g. help, skills, contact, clear)..." autocomplete="off" spellcheck="false">
+          <button class="term-send-btn" id="termSendBtn" aria-label="Run Command">
+            <i data-lucide="corner-down-left"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS / ENDORSEMENTS ================= -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="message-circle"></i>
+        <span>VALIDATION</span>
+      </div>
+      <h2 class="section-title">What Collaborators & <span class="gradient-text">Leaders Say</span></h2>
+      <p class="section-subtitle">Real feedback from CTOs, Engineering Directors, and Product Managers I've partnered with.</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card glass-panel">
+          <div class="testimonial-quote-icon">“</div>
+          <p class="testimonial-text">
+            "Rodel is the rare engineer who effortlessly bridges complex backend scaling challenges with world-class user interfaces. He revolutionized our cloud infrastructure, cut our response times by 70%, and did it all ahead of schedule."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="--bg: #3b82f6;">MK</div>
+            <div class="author-info">
+              <h4>Marcus Keller</h4>
+              <span>VP of Engineering @ Aura Systems</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card glass-panel">
+          <div class="testimonial-quote-icon">“</div>
+          <p class="testimonial-text">
+            "Working with Rodel on our payment ledger was one of the smoothest projects in my career. His attention to edge cases, strict typing, and fault-tolerance saved us countless headaches. An indispensable technical asset."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="--bg: #10b981;">ST</div>
+            <div class="author-info">
+              <h4>Sarah Takeda</h4>
+              <span>Head of Product @ Nexus FinTech</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card glass-panel">
+          <div class="testimonial-quote-icon">“</div>
+          <p class="testimonial-text">
+            "Not only does Rodel write pristine, maintainable code, but his sense of design aesthetics and micro-interactions makes every product feel magical. Any engineering team would be fortunate to have him lead."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="--bg: #a855f7;">DV</div>
+            <div class="author-info">
+              <h4>David Vance</h4>
+              <span>Co-Founder & CTO @ Quantix Labs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT SECTION ================= -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-badge">
+        <i data-lucide="mail"></i>
+        <span>COMMUNICATION</span>
+      </div>
+      <h2 class="section-title">Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
+      <p class="section-subtitle">Have an ambitious project, open role, or technical vision? Drop a message and I'll reply within 24 hours.</p>
+
+      <div class="contact-grid">
+        <!-- Contact Information & Channels -->
+        <div class="contact-info-card glass-panel">
+          <div class="info-header">
+            <h3>Get in Touch</h3>
+            <p>I'm always open to discussing new engineering challenges, high-impact contracts, or full-time leadership opportunities.</p>
+          </div>
+
+          <div class="info-items">
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="mail"></i></div>
+              <div class="info-details">
+                <span class="info-label">Direct Email</span>
+                <a href="mailto:rodel.engineer@gmail.com" class="info-val">rodel.engineer@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="map-pin"></i></div>
+              <div class="info-details">
+                <span class="info-label">Location & Timezone</span>
+                <span class="info-val">Global Remote / Flexible Overlap</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="clock"></i></div>
+              <div class="info-details">
+                <span class="info-label">Current Local Time</span>
+                <span class="info-val" id="liveLocalClock">Loading...</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="check-circle"></i></div>
+              <div class="info-details">
+                <span class="info-label">Current Work Status</span>
+                <span class="info-val status-val-avail"><span class="pulse-dot"></span> Ready for Immediate Onboarding</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links Strip -->
+          <div class="social-channels">
+            <span class="social-title">Connect on Social Platforms:</span>
+            <div class="social-links-row">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="GitHub">
+                <i data-lucide="github"></i>
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="LinkedIn">
+                <i data-lucide="linkedin"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="X / Twitter">
+                <i data-lucide="twitter"></i>
+                <span>Twitter/X</span>
+              </a>
+              <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="Discord">
+                <i data-lucide="message-square"></i>
+                <span>Discord</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Contact Form -->
+        <div class="contact-form-card glass-panel">
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="formName">Your Name <span class="required">*</span></label>
+                <div class="input-wrap">
+                  <i data-lucide="user"></i>
+                  <input type="text" id="formName" name="name" placeholder="e.g. Alex Morgan" required>
+                </div>
+                <span class="error-msg" id="nameError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="formEmail">Your Email <span class="required">*</span></label>
+                <div class="input-wrap">
+                  <i data-lucide="at-sign"></i>
+                  <input type="email" id="formEmail" name="email" placeholder="alex@company.com" required>
+                </div>
+                <span class="error-msg" id="emailError"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="formSubject">Subject / Opportunity Type</label>
+              <div class="input-wrap">
+                <i data-lucide="tag"></i>
+                <input type="text" id="formSubject" name="subject" placeholder="Project Inquiry / Job Opportunity / Architecture Consulting">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="formBudget">Project Scope / Budget Range (Optional)</label>
+              <div class="input-wrap">
+                <i data-lucide="dollar-sign"></i>
+                <select id="formBudget" name="budget" class="form-select">
+                  <option value="" disabled selected>Select an approximate budget range...</option>
+                  <option value="5k-10k">$5,000 - $10,000</option>
+                  <option value="10k-25k">$10,000 - $25,000</option>
+                  <option value="25k-50k">$25,000 - $50,000+</option>
+                  <option value="fulltime">Full-Time Annual Compensation</option>
+                  <option value="consulting">Advisory / Consultation</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="formMessage">Project Details or Message <span class="required">*</span></label>
+              <div class="input-wrap textarea-wrap">
+                <i data-lucide="message-circle"></i>
+                <textarea id="formMessage" name="message" rows="5" placeholder="Tell me about your goals, timelines, or tech stack requirements..." required></textarea>
+              </div>
+              <span class="error-msg" id="messageError"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block submit-btn" id="submitFormBtn">
+              <span class="btn-text">Transmit Message</span>
+              <i data-lucide="send" class="btn-icon"></i>
+            </button>
+            <div class="form-security-note">
+              <i data-lucide="lock"></i> 256-bit encrypted simulated transmission. No spam guarantee.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-symbol">
+            <span>R</span>
+          </div>
+          <span class="footer-brand-name">RODEL.ENGINEERING</span>
+        </div>
+        <p class="footer-tagline">Crafting resilient, high-speed architectures & boundary-pushing web software.</p>
+        <div class="footer-back-to-top">
+          <a href="#hero" class="btn-back-top" aria-label="Back to Top">
+            <i data-lucide="arrow-up"></i>
+            <span>Top</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="currentYear">2026</span> Rodel. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <span>Designed with Dark Cyber Elegance</span>
+          <span>•</span>
+          <span>Performance Score 100</span>
+          <span>•</span>
+          <span>Built for the Future</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING COMMAND PALETTE / MODAL (Ctrl + K) ================= -->
+  <div class="cmd-palette-backdrop" id="cmdPaletteBackdrop">
+    <div class="cmd-palette-modal glass-panel" id="cmdPaletteModal">
+      <div class="cmd-palette-input-wrap">
+        <i data-lucide="search" class="cmd-palette-icon"></i>
+        <input type="text" id="cmdPaletteInput" placeholder="Type a destination, project, action, or command..." autocomplete="off">
+        <span class="cmd-esc-badge"><kbd>ESC</kbd></span>
+      </div>
+
+      <div class="cmd-palette-results" id="cmdPaletteResults">
+        <div class="cmd-group-title">Navigation Quick Links</div>
+        <div class="cmd-item" data-action="nav" data-target="#hero"><i data-lucide="home"></i> Home / Hero</div>
+        <div class="cmd-item" data-action="nav" data-target="#about"><i data-lucide="user"></i> About Rodel</div>
+        <div class="cmd-item" data-action="nav" data-target="#skills"><i data-lucide="cpu"></i> Skills & Stack</div>
+        <div class="cmd-item" data-action="nav" data-target="#projects"><i data-lucide="folder-git-2"></i> Featured Projects</div>
+        <div class="cmd-item" data-action="nav" data-target="#experience"><i data-lucide="briefcase"></i> Experience Track</div>
+        <div class="cmd-item" data-action="nav" data-target="#terminal"><i data-lucide="terminal"></i> Developer Console</div>
+        <div class="cmd-item" data-action="nav" data-target="#contact"><i data-lucide="mail"></i> Contact & Hire</div>
+
+        <div class="cmd-group-title">Quick Actions</div>
+        <div class="cmd-item" data-action="copy-email"><i data-lucide="copy"></i> Copy Direct Email (rodel.engineer@gmail.com)</div>
+        <div class="cmd-item" data-action="download-cv"><i data-lucide="download"></i> Download Resume / CV</div>
+        <div class="cmd-item" data-action="toggle-sound"><i data-lucide="volume-2"></i> Toggle UI Sound Effects</div>
+
+        <div class="cmd-group-title">Accent Colors</div>
+        <div class="cmd-item" data-action="theme" data-theme-val="cyan"><i data-lucide="droplet" style="color:#00f2fe"></i> Switch to Neon Cyan</div>
+        <div class="cmd-item" data-action="theme" data-theme-val="purple"><i data-lucide="droplet" style="color:#a855f7"></i> Switch to Electric Violet</div>
+        <div class="cmd-item" data-action="theme" data-theme-val="emerald"><i data-lucide="droplet" style="color:#10b981"></i> Switch to Matrix Emerald</div>
+        <div class="cmd-item" data-action="theme" data-theme-val="amber"><i data-lucide="droplet" style="color:#f59e0b"></i> Switch to Solar Amber</div>
+        <div class="cmd-item" data-action="theme" data-theme-val="rose"><i data-lucide="droplet" style="color:#f43f5e"></i> Switch to Cyber Rose</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PROJECT CASE STUDY DETAIL MODAL ================= -->
+  <div class="modal-backdrop" id="projectModalBackdrop">
+    <div class="modal-dialog glass-panel" id="projectModalDialog">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Modal">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="modal-inner" id="projectModalContent">
+        <!-- Content injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
